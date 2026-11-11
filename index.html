@@ -274,7 +274,9 @@ tm=setTimeout(function(){pb.style.width='100%';$('#c').innerHTML=V[n]();setTimeo
 var ia,ib;
 function moveInd(btn,anim){var ind=$('#ind'),l2=btn.offsetLeft,w2=btn.offsetWidth;clearTimeout(ia);
 if(!anim){ind.style.transition='none';ind.style.left=l2+'px';ind.style.width=w2+'px';return}
-ind.style.transition='left .25s cubic-bezier(.4,0,.2,1),width .25s cubic-bezier(.4,0,.2,1)';ind.style.left=l2+'px';ind.style.width=w2+'px'}
+var l1=parseFloat(ind.style.left)||0,r1=l1+(parseFloat(ind.style.width)||0),r2=l2+w2,L=Math.min(l1,l2),R=Math.max(r1,r2);
+ind.style.transition='left .16s cubic-bezier(.4,0,.2,1),width .16s cubic-bezier(.4,0,.2,1)';ind.style.left=L+'px';ind.style.width=(R-L)+'px';
+ia=setTimeout(function(){ind.style.transition='left .22s cubic-bezier(.2,0,0,1),width .22s cubic-bezier(.2,0,0,1)';ind.style.left=l2+'px';ind.style.width=w2+'px'},160)}
 function go(n,first){cur=n;var tb;document.querySelectorAll('#tabs button').forEach(function(b){var on=b.textContent===n;b.className=on?'on':'';if(on)tb=b});try{history.replaceState(null,'','#'+n.toLowerCase())}catch(e){}
 if(first){moveInd(tb,false);load(n,true);return}
 clearTimeout(tm);clearTimeout(ib);moveInd(tb,true);
